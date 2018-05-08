@@ -69,7 +69,15 @@ setup() {
   true
 }
 
+global_setup() {
+  true
+}
+
 teardown() {
+  true
+}
+
+global_teardown() {
   true
 }
 
@@ -84,6 +92,11 @@ bats_test_begin() {
   BATS_TEST_DESCRIPTION="$1"
   if [ -n "$BATS_EXTENDED_SYNTAX" ]; then
     echo "begin $BATS_TEST_NUMBER $BATS_TEST_DESCRIPTION" >&3
+  fi
+  # Skipping error handlding here, but this needs to be addressed
+  # in some way, I think.
+  if [ "$BATS_TEST_NUMBER" -eq 1 ]; then
+    global_setup
   fi
   setup
 }
@@ -255,6 +268,11 @@ bats_teardown_trap() {
     BATS_ERROR_STACK_TRACE=( "${BATS_CURRENT_STACK_TRACE[@]}" )
   fi
 
+  # Skipping error handlding here, but this needs to be addressed
+  # in some way, I think.
+  if [ "$BATS_TEST_NUMBER" -eq "${#BATS_TEST_NAMES[@]}" ]; then
+    global_teardown
+  fi
   bats_exit_trap
 }
 
