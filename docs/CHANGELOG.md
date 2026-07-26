@@ -15,6 +15,10 @@ The format is based on [Keep a Changelog][kac] and this project adheres to
 
 * pretty formatter was not the default on interactive shells anymore (#1220)
 
+### Documentation
+
+* removed the FAQ's outdated claim that suite-wide setup functionality does not exist; it now points to `setup_suite` (#1213)
+
 ## [1.14.0] - 2026-07-21
 
 ### Added
